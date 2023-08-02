@@ -6,11 +6,12 @@ LDLIBS = -lGL -lGLU -lglfw -lm -lXrandr -lXi -lX11  -lpthread -ldl -lXinerama -l
 
 SRC = $(wildcard src/*.cpp)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
+EXTRAS= $(wildcard src/%.glsl)
 
 APP = app
 all: $(APP)
 
-app: obj/glad.o $(OBJ)
+app: obj/glad.o $(OBJ) $(EXTRAS)
 	$(CXX) $(CXXFLAGS)  $(LDLIBS) obj/glad.o $(OBJ) -o $(APP)
 
 obj/glad.o: src/glad.c
